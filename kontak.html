@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak &amp; Lokasi - SD Negeri 18 Pandan</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+        }
+        .bg-navy { background-color: #0b4a8f; }
+        .text-navy { color: #0b4a8f; }
+        .btn-navy {
+            background-color: #0b4a8f;
+            color: white;
+            border-radius: 50px;
+            transition: background-color 0.2s ease;
+        }
+        .btn-navy:hover {
+            background-color: #08376b;
+            color: white;
+        }
+        .btn-red { background-color: #dc2626; color: white; border-radius: 50px; }
+        .btn-red:hover { background-color: #b91c1c; color: white; }
+
+        /* Page Header */
+        .page-header {
+            background-color: #eef4fb;
+            padding: 40px 0 30px;
+        }
+        .red-line {
+            width: 48px;
+            height: 4px;
+            background-color: #dc2626;
+            border-radius: 2px;
+            margin-top: 12px;
+        }
+
+        /* Kartu Hubungi Sekolah */
+        .contact-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 36px;
+            height: 100%;
+        }
+
+        /* Kartu Lokasi Sekolah */
+        .location-card {
+            background-color: #e2ecf9;
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        /* Kartu Media Sosial Sekolah */
+        .social-card {
+            background-color: #0b4a8f;
+            color: white;
+            border-radius: 16px;
+            padding: 32px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Top Bar -->
+    <div class="bg-navy text-white py-2 small">
+        <div class="container d-flex justify-content-between align-items-center flex-wrap">
+            <div class="fw-semibold">INFORMASI SD NEGERI 18 PANDAN</div>
+            <div class="opacity-90">Dusun Landau Tuan &bull; NPSN 30102756</div>
+        </div>
+    </div>
+
+    <!-- 2. Navbar Utama -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="assets/img/logo-sekolah.jpeg" alt="Logo SDN 18 Pandan" width="48" height="48" class="me-2" onerror="this.style.display='none'">
+                <div>
+                    <div class="fw-bold text-navy lh-1" style="font-size: 1.05rem;">SD NEGERI 18 PANDAN</div>
+                    <small class="text-muted fst-italic" style="font-size: 0.75rem;">Berilmu, Berkarakter, Berprestasi</small>
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3 fw-medium small">
+                    <li class="nav-item"><a class="nav-link" href="index.html">BERANDA</a></li>
+                    <li class="nav-item"><a class="nav-link" href="profil.html">PROFIL</a></li>
+                    <li class="nav-item"><a class="nav-link" href="berita.html">BERITA</a></li>
+                    <li class="nav-item"><a class="nav-link" href="galeri.html">GALERI</a></li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-red btn-sm px-4 fw-semibold" href="kontak.html">KONTAK</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 3. Header Halaman -->
+    <header class="page-header">
+        <div class="container">
+            <nav aria-label="breadcrumb" class="small mb-2">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="index.html" class="text-muted text-decoration-none">Beranda</a></li>
+                    <li class="breadcrumb-item active text-navy fw-medium" aria-current="page">Kontak &amp; Lokasi</li>
+                </ol>
+            </nav>
+            <h1 class="fw-bold text-navy mb-1">Kontak &amp; Lokasi</h1>
+            <p class="text-muted mb-0">Temukan informasi layanan dan lokasi sekolah.</p>
+            <div class="red-line"></div>
+        </div>
+    </header>
+
+    <!-- 4. Konten Kontak & Lokasi -->
+    <section class="py-5 bg-white">
+        <div class="container">
+            <div class="row g-4 align-items-stretch">
+                <!-- Kolom Kiri (Hubungi Sekolah) -->
+                <div class="col-lg-5">
+                    <div class="contact-card shadow-sm d-flex flex-column justify-content-between">
+                        <div>
+                            <h4 class="fw-bold text-navy mb-4">Hubungi Sekolah</h4>
+
+                            <div class="pb-3 mb-3 border-bottom">
+                                <small class="text-muted d-block mb-1">Alamat</small>
+                                <div class="fw-bold text-navy">Dusun Landau Tuan</div>
+                                <small class="text-muted">Desa Repak Sari, Kec. Tempunak, Kab. Sintang, Kalimantan Barat 78661</small>
+                            </div>
+
+                            <div class="pb-3 mb-3 border-bottom">
+                                <small class="text-muted d-block mb-1">Telepon resmi</small>
+                                <div class="text-navy fw-medium">Menunggu konfirmasi sekolah</div>
+                            </div>
+
+                            <div class="pb-3 mb-3 border-bottom">
+                                <small class="text-muted d-block mb-1">Email resmi</small>
+                                <div class="text-navy fw-medium">Menunggu konfirmasi sekolah</div>
+                            </div>
+
+                            <div class="pb-3 mb-4">
+                                <small class="text-muted d-block mb-1">Jam layanan</small>
+                                <div class="fw-bold text-navy">Senin &ndash; Sabtu, 08.00 &ndash; 13.30 WIB</div>
+                                <small class="text-muted">Minggu &amp; hari libur nasional tutup</small>
+                            </div>
+                        </div>
+
+                        <p class="text-muted mb-0" style="font-size: 0.78rem; line-height: 1.5;">
+                            Nomor dan email contoh pada beranda belum dianggap sebagai kontak resmi.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Kolom Kanan (Lokasi Sekolah + Media Sosial) -->
+                <div class="col-lg-7 d-flex flex-column gap-4">
+                    <!-- Kartu Lokasi Sekolah dengan Google Maps -->
+                    <div class="location-card">
+                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+                            <div>
+                                <h4 class="fw-bold text-navy mb-1">Lokasi Sekolah</h4>
+                                <p class="text-muted small mb-0">Titik lokasi SD Negeri 18 Pandan (Dusun Landau Tuan, Desa Repak Sari)</p>
+                            </div>
+                            <span class="badge bg-success rounded-pill px-3 py-2">
+                                <i class="bi bi-geo-alt-fill me-1"></i> Lokasi Terverifikasi
+                            </span>
+                        </div>
+
+                        <!-- Peta Interaktif Google Maps -->
+                        <div class="rounded-4 overflow-hidden shadow-sm mb-3 border bg-white">
+                            <iframe
+                                src="https://maps.google.com/maps?q=SD+Repak+Sari,+Repak+Sari,+Tempunak,+Kabupaten+Sintang&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                                width="100%"
+                                height="230"
+                                style="border:0; display:block;"
+                                allowfullscreen=""
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                            <span class="fw-bold text-navy small">V9WC+M65, Repak Sari, Kec. Tempunak</span>
+                            <a href="https://maps.app.goo.gl/CyBzFV87f2LBGFLz9?g_st=aw" target="_blank" rel="noopener noreferrer" class="btn btn-navy btn-sm px-4 py-2 fw-semibold">
+                                <i class="bi bi-map me-1"></i> Buka di Google Maps &rarr;
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Kartu Media Sosial Sekolah -->
+                    <div class="social-card shadow-sm">
+                        <h4 class="fw-bold mb-3">Media sosial sekolah</h4>
+                        <div class="fw-bold mb-2">
+                            <i class="bi bi-tiktok me-1"></i> TikTok
+                        </div>
+                        <p class="small opacity-90 mb-0" style="line-height: 1.65;">
+                            Alamat akun resmi masih menunggu konfirmasi. Akun lain tidak dicantumkan sebelum terverifikasi.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Footer -->
+    <footer class="bg-navy text-white pt-4 pb-3">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center flex-wrap border-bottom border-secondary pb-3 mb-3">
+                <div>
+                    <h6 class="fw-bold mb-0">SD NEGERI 18 PANDAN</h6>
+                    <small class="opacity-75">Berilmu, Berkarakter, Berprestasi</small>
+                </div>
+                <div class="small opacity-75 mt-2 mt-md-0 text-md-end">
+                    <div>Dusun Landau Tuan</div>
+                    <div>NPSN 30102756</div>
+                </div>
+            </div>
+            <div class="text-center small opacity-75">&copy; 2026 SD Negeri 18 Pandan</div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
