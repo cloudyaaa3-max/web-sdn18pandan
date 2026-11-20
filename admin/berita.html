@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berita &amp; Pengumuman - Admin SD Negeri 18 Pandan</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7fb;
+            margin: 0;
+        }
+        .text-navy { color: #0b3d82; }
+        .bg-navy { background-color: #0b3d82; }
+
+        /* Layout Utama */
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Kiri */
+        .sidebar {
+            width: 270px;
+            background-color: #0b3d82;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 28px 20px;
+            flex-shrink: 0;
+        }
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 32px;
+            padding: 0 8px;
+        }
+        .sidebar-logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #ffffff;
+            padding: 2px;
+        }
+        .sidebar-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            opacity: 0.7;
+            padding: 0 12px;
+            margin-bottom: 12px;
+        }
+        .sidebar-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        .sidebar-link:hover {
+            background-color: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+        }
+        .sidebar-link.active {
+            background-color: #ffffff;
+            color: #0b3d82;
+            font-weight: 700;
+        }
+        .sidebar-num {
+            font-size: 0.75rem;
+            opacity: 0.75;
+            min-width: 18px;
+        }
+        .sidebar-footer {
+            padding: 20px 12px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .logout-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-top: 16px;
+        }
+        .logout-link:hover {
+            text-decoration: underline;
+            color: #fca5a5;
+        }
+
+        /* Konten Kanan */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .topbar {
+            background-color: #ffffff;
+            padding: 18px 40px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .content-body {
+            padding: 36px 40px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* Filter Bar & Tombol Merah */
+        .filter-pill-box {
+            background-color: #ffffff;
+            border-radius: 16px;
+            padding: 14px 24px;
+            border: 1px solid #e2e8f0;
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .filter-tab {
+            background: none;
+            border: none;
+            padding: 0;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #0b3d82;
+            opacity: 0.65;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+        .filter-tab.active, .filter-tab:hover {
+            opacity: 1;
+        }
+        .btn-red-pill {
+            background-color: #dc2626;
+            color: #ffffff;
+            border: none;
+            border-radius: 50px;
+            padding: 13px 28px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            transition: background-color 0.2s ease;
+        }
+        .btn-red-pill:hover {
+            background-color: #b91c1c;
+            color: #ffffff;
+        }
+
+        /* Kartu Tabel Berita */
+        .panel-card {
+            background-color: #ffffff;
+            border-radius: 16px;
+            padding: 28px 32px;
+            border: 1px solid #e2e8f0;
+        }
+        .badge-draf {
+            background-color: #e4edf9;
+            color: #0b3d82;
+            font-weight: 700;
+            font-size: 0.78rem;
+            padding: 8px 24px;
+            border-radius: 50px;
+            display: inline-block;
+        }
+        .badge-terbit {
+            background-color: #dcfce7;
+            color: #166534;
+            font-weight: 700;
+            font-size: 0.78rem;
+            padding: 8px 24px;
+            border-radius: 50px;
+            display: inline-block;
+        }
+        .action-edit {
+            color: #0b3d82;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .action-edit:hover {
+            text-decoration: underline;
+            color: #082c5e;
+        }
+        .action-delete {
+            color: #dc2626;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-decoration: none;
+            display: block;
+        }
+        .action-delete:hover {
+            text-decoration: underline;
+            color: #b91c1c;
+        }
+
+        /* Kartu Alur Penerbitan */
+        .guide-card {
+            background-color: #e4edf9;
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        /* Form Modal Custom */
+        .form-label-custom {
+            color: #0b3d82;
+            font-weight: 700;
+            font-size: 0.82rem;
+            margin-bottom: 6px;
+        }
+        .form-control-custom, .form-select-custom {
+            background-color: #eef3fa;
+            border: 1px solid transparent;
+            border-radius: 12px;
+            padding: 12px 16px;
+            font-size: 0.85rem;
+            color: #1e293b;
+        }
+        .form-control-custom:focus, .form-select-custom:focus {
+            background-color: #eef3fa;
+            border-color: #0b3d82;
+            box-shadow: 0 0 0 0.2rem rgba(11, 61, 130, 0.15);
+        }
+        .btn-pill-navy {
+            background-color: #0b3d82;
+            color: #ffffff;
+            border-radius: 50px;
+            padding: 11px 24px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border: none;
+        }
+        .btn-pill-navy:hover {
+            background-color: #082c5e;
+            color: #ffffff;
+        }
+
+        @media (max-width: 991.98px) {
+            .admin-layout {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+            }
+            .topbar, .content-body {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="admin-layout">
+        <!-- Sidebar Kiri -->
+        <aside class="sidebar">
+            <div>
+                <div class="sidebar-brand">
+                    <img src="../assets/img/logo-sekolah.png" alt="Logo SDN 18 Pandan" class="sidebar-logo" onerror="this.style.display='none'">
+                    <div class="fw-bold lh-sm" style="font-size: 0.9rem;">SD NEGERI<br>18 PANDAN</div>
+                </div>
+
+                <div class="sidebar-label">PANEL ADMIN</div>
+
+                <ul class="sidebar-nav">
+                    <li>
+                        <a href="index.html" class="sidebar-link">
+                            <span class="sidebar-num">01</span>
+                            <span>Ringkasan</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="guru.html" class="sidebar-link">
+                            <span class="sidebar-num">02</span>
+                            <span>Data guru</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="berita.html" class="sidebar-link active">
+                            <span class="sidebar-num">03</span>
+                            <span>Berita &amp; pengumuman</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="galeri.html" class="sidebar-link">
+                            <span class="sidebar-num">04</span>
+                            <span>Galeri kegiatan</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="prestasi.html" class="sidebar-link">
+                            <span class="sidebar-num">05</span>
+                            <span>Prestasi</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="profil.html" class="sidebar-link">
+                            <span class="sidebar-num">06</span>
+                            <span>Profil sekolah</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="fw-bold small">Martha Susanti, S.Pd.</div>
+                <div class="small opacity-75" style="font-size: 0.78rem;">Operator sekolah</div>
+                <a href="login.html" class="logout-link">Keluar akun &rarr;</a>
+            </div>
+        </aside>
+
+        <!-- Konten Utama Kanan -->
+        <div class="main-content">
+            <!-- Topbar -->
+            <header class="topbar">
+                <div class="small text-muted">
+                    Admin &nbsp;/&nbsp; <span class="text-navy fw-semibold">Berita &amp; pengumuman</span>
+                </div>
+                <a href="../index.html" class="text-navy fw-bold text-decoration-none small">
+                    Lihat situs sekolah &rarr;
+                </a>
+            </header>
+
+            <!-- Isi Halaman -->
+            <main class="content-body">
+                <h2 class="fw-bold text-navy mb-1">Berita &amp; Pengumuman</h2>
+                <p class="text-muted small mb-4">Siapkan naskah, periksa persetujuan, lalu terbitkan.</p>
+
+                <!-- Baris Filter & Tombol Tulis Berita Baru -->
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+                    <div class="filter-pill-box" id="beritaFilter">
+                        <button type="button" class="filter-tab active" data-status="all">Semua</button>
+                        <span class="text-navy opacity-50 fw-bold">/</span>
+                        <button type="button" class="filter-tab" data-status="draft">Draf</button>
+                        <span class="text-navy opacity-50 fw-bold">/</span>
+                        <button type="button" class="filter-tab" data-status="terbit">Terbit</button>
+                    </div>
+
+                   <a href="editor-berita.html" class="btn btn-red-pill text-decoration-none">
+    Tulis berita baru
+</a>
+                        Tulis berita baru
+                    </button>
+                </div>
+
+                <!-- Kartu Daftar Berita & Pengumuman -->
+                <div class="panel-card mb-4">
+                    <div class="row text-muted small fw-semibold pb-3 border-bottom">
+                        <div class="col-md-7">Judul &amp; kategori</div>
+                        <div class="col-md-3">Status</div>
+                        <div class="col-md-2">Aksi</div>
+                    </div>
+
+                    <div id="daftarBerita">
+                        <!-- Item Berita 1 -->
+                        <div class="row py-4 align-items-start berita-row" data-status="draft">
+                            <div class="col-md-7 mb-3 mb-md-0">
+                                <h5 class="fw-bold text-navy mb-2" style="line-height: 1.4;">
+                                    Membangun Generasi Berkarakter<br>dan Berprestasi
+                                </h5>
+                                <div class="text-muted small mb-3">Kegiatan sekolah &middot; Pratinjau konten beranda</div>
+                                <div class="text-muted" style="font-size: 0.82rem;">Rancangan tampilan, belum menjadi publikasi resmi.</div>
+                            </div>
+                            <div class="col-md-3 mb-3 mb-md-0">
+                                <span class="badge-draf">Draf</span>
+                            </div>
+                            <div class="col-md-2">
+                               <a href="editor-berita.html" class="action-edit">Edit</a>
+                                <a href="#" class="action-delete" onclick="return confirm('Hapus draf berita ini?');">Hapus</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kartu Alur Penerbitan -->
+                <div class="guide-card">
+                    <h5 class="fw-bold text-navy mb-4">Alur Penerbitan</h5>
+
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="fw-bold text-navy mb-2">
+                                <span class="text-muted me-2">01</span> Siapkan draf
+                            </div>
+                            <p class="text-muted small mb-0" style="line-height: 1.6;">
+                                Lengkapi judul, isi, kategori, dan lampiran.
+                            </p>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="fw-bold text-navy mb-2">
+                                <span class="text-muted me-2">02</span> Minta persetujuan
+                            </div>
+                            <p class="text-muted small mb-0" style="line-height: 1.6;">
+                                Kepala sekolah meninjau tanpa akun tersendiri.
+                            </p>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="fw-bold text-navy mb-2">
+                                <span class="text-muted me-2">03</span> Terbitkan
+                            </div>
+                            <p class="text-muted small mb-0" style="line-height: 1.6;">
+                                Operator menerbitkan berita yang disetujui.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal Tulis / Edit Berita -->
+    <div class="modal fade" id="modalTulisBerita" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content border-0 rounded-4 p-2">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold text-navy">Tulis Berita / Pengumuman</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="berita.html" method="GET" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="judul" class="form-label-custom">Judul berita *</label>
+                            <input type="text" class="form-control form-control-custom" id="judul" name="judul" placeholder="Masukkan judul berita atau pengumuman" required>
+                        </div>
+
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label for="id_kategori" class="form-label-custom">Kategori *</label>
+                                <select class="form-select form-select-custom" id="id_kategori" name="id_kategori" required>
+                                    <option value="1">Berita Sekolah</option>
+                                    <option value="2">Kegiatan Sekolah</option>
+                                    <option value="3">Pengumuman Resmi</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="status" class="form-label-custom">Status publikasi *</label>
+                                <select class="form-select form-select-custom" id="status" name="status" required>
+                                    <option value="draft" selected>Draf (Menunggu persetujuan)</option>
+                                    <option value="terbit">Terbit (Tampilkan ke publik)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="ringkasan" class="form-label-custom">Ringkasan singkat</label>
+                            <textarea class="form-control form-control-custom" id="ringkasan" name="ringkasan" rows="2" placeholder="Ringkasan singkat untuk tampilan kartu berita..."></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="isi_berita" class="form-label-custom">Isi lengkap berita *</label>
+                            <textarea class="form-control form-control-custom" id="isi_berita" name="isi_berita" rows="5" placeholder="Tulis isi lengkap naskah berita atau pengumuman..." required></textarea>
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="gambar_utama" class="form-label-custom">Gambar utama / lampiran</label>
+                            <input type="file" class="form-control form-control-custom" id="gambar_utama" name="gambar_utama" accept="image/*">
+                        </div>
+                    </div>
+                    <div class="modal-footer border-0 pt-0">
+                        <button type="button" class="btn btn-light rounded-pill px-4 fw-semibold small" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-pill-navy">Simpan naskah</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Filter Tab Semua / Draf / Terbit
+        const filterTabs = document.querySelectorAll('#beritaFilter .filter-tab');
+        const beritaRows = document.querySelectorAll('#daftarBerita .berita-row');
+
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                filterTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                const status = tab.getAttribute('data-status');
+
+                beritaRows.forEach(row => {
+                    if (status === 'all' || row.getAttribute('data-status') === status) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor Berita - Admin SD Negeri 18 Pandan</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7fb;
+            margin: 0;
+        }
+        .text-navy { color: #0b3d82; }
+        .bg-navy { background-color: #0b3d82; }
+
+        /* Layout Utama */
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Kiri */
+        .sidebar {
+            width: 270px;
+            background-color: #0b3d82;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 28px 20px;
+            flex-shrink: 0;
+        }
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 32px;
+            padding: 0 8px;
+        }
+        .sidebar-logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #ffffff;
+            padding: 2px;
+        }
+        .sidebar-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            opacity: 0.7;
+            padding: 0 12px;
+            margin-bottom: 12px;
+        }
+        .sidebar-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        .sidebar-link:hover {
+            background-color: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+        }
+        .sidebar-link.active {
+            background-color: #ffffff;
+            color: #0b3d82;
+            font-weight: 700;
+        }
+        .sidebar-num {
+            font-size: 0.75rem;
+            opacity: 0.75;
+            min-width: 18px;
+        }
+        .sidebar-footer {
+            padding: 20px 12px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .logout-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-top: 16px;
+        }
+        .logout-link:hover {
+            text-decoration: underline;
+            color: #fca5a5;
+        }
+
+        /* Konten Kanan */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .topbar {
+            background-color: #ffffff;
+            padding: 18px 40px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .content-body {
+            padding: 36px 40px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* Kartu Form */
+        .panel-card {
+            background-color: #ffffff;
+            border-radius: 16px;
+            padding: 32px;
+            border: 1px solid #e2e8f0;
+        }
+        .form-label-custom {
+            color: #0b3d82;
+            font-weight: 700;
+            font-size: 0.82rem;
+            margin-bottom: 8px;
+        }
+        .form-control-custom, .form-select-custom {
+            background-color: #eef3fa;
+            border: 1px solid transparent;
+            border-radius: 12px;
+            padding: 14px 16px;
+            font-size: 0.85rem;
+            color: #1e293b;
+        }
+        .form-control-custom:focus, .form-select-custom:focus {
+            background-color: #eef3fa;
+            border-color: #0b3d82;
+            box-shadow: 0 0 0 0.2rem rgba(11, 61, 130, 0.15);
+        }
+
+        /* Rich Text Editor Box */
+        .editor-wrapper {
+            background-color: #eef3fa;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid transparent;
+        }
+        .editor-wrapper:focus-within {
+            border-color: #0b3d82;
+        }
+        .editor-toolbar {
+            background-color: #dfe9f7;
+            padding: 10px 16px;
+            display: flex;
+            gap: 18px;
+        }
+        .editor-tool-btn {
+            background: none;
+            border: none;
+            padding: 0;
+            color: #0b3d82;
+            font-weight: 700;
+            font-size: 0.82rem;
+            cursor: pointer;
+        }
+        .editor-tool-btn:hover {
+            text-decoration: underline;
+        }
+        .editor-area {
+            width: 100%;
+            min-height: 220px;
+            background: transparent;
+            border: none;
+            padding: 18px;
+            font-size: 0.88rem;
+            color: #1e293b;
+            resize: vertical;
+            outline: none;
+        }
+
+        /* Tombol Pill */
+        .btn-pill-navy {
+            background-color: #0b3d82;
+            color: #ffffff;
+            border-radius: 50px;
+            padding: 12px 24px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border: none;
+            transition: background-color 0.2s ease;
+        }
+        .btn-pill-navy:hover {
+            background-color: #082c5e;
+            color: #ffffff;
+        }
+        .btn-pill-soft {
+            background-color: #e4edf9;
+            color: #64748b;
+            border-radius: 50px;
+            padding: 12px 24px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border: none;
+            transition: all 0.2s ease;
+        }
+        .btn-pill-soft.ready {
+            background-color: #dc2626;
+            color: #ffffff;
+            cursor: pointer;
+        }
+        .btn-pill-soft.ready:hover {
+            background-color: #b91c1c;
+        }
+
+        /* Kartu Penting */
+        .important-card {
+            background-color: #e4edf9;
+            border-radius: 16px;
+            padding: 28px;
+        }
+
+        @media (max-width: 991.98px) {
+            .admin-layout {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+            }
+            .topbar, .content-body {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="admin-layout">
+        <!-- Sidebar Kiri -->
+        <aside class="sidebar">
+            <div>
+                <div class="sidebar-brand">
+                    <img src="../assets/img/logo-sekolah.png" alt="Logo SDN 18 Pandan" class="sidebar-logo" onerror="this.style.display='none'">
+                    <div class="fw-bold lh-sm" style="font-size: 0.9rem;">SD NEGERI<br>18 PANDAN</div>
+                </div>
+
+                <div class="sidebar-label">PANEL ADMIN</div>
+
+                <ul class="sidebar-nav">
+                    <li>
+                        <a href="index.html" class="sidebar-link">
+                            <span class="sidebar-num">01</span>
+                            <span>Ringkasan</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="guru.html" class="sidebar-link">
+                            <span class="sidebar-num">02</span>
+                            <span>Data guru</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="berita.html" class="sidebar-link active">
+                            <span class="sidebar-num">03</span>
+                            <span>Berita &amp; pengumuman</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="galeri.html" class="sidebar-link">
+                            <span class="sidebar-num">04</span>
+                            <span>Galeri kegiatan</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="prestasi.html" class="sidebar-link">
+                            <span class="sidebar-num">05</span>
+                            <span>Prestasi</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="profil.html" class="sidebar-link">
+                            <span class="sidebar-num">06</span>
+                            <span>Profil sekolah</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="fw-bold small">Martha Susanti, S.Pd.</div>
+                <div class="small opacity-75" style="font-size: 0.78rem;">Operator sekolah</div>
+                <a href="login.html" class="logout-link">Keluar akun &rarr;</a>
+            </div>
+        </aside>
+
+        <!-- Konten Utama Kanan -->
+        <div class="main-content">
+            <!-- Topbar -->
+            <header class="topbar">
+                <div class="small text-muted">
+                    Admin &nbsp;/&nbsp; <span class="text-navy fw-semibold">Editor berita</span>
+                </div>
+                <a href="../index.html" class="text-navy fw-bold text-decoration-none small">
+                    Lihat situs sekolah &rarr;
+                </a>
+            </header>
+
+            <!-- Isi Halaman -->
+            <main class="content-body">
+                <h2 class="fw-bold text-navy mb-1">Tulis Berita / Pengumuman</h2>
+                <p class="text-muted small mb-4">Draf tidak ditampilkan pada halaman publik.</p>
+
+                <form action="berita.html" method="GET" enctype="multipart/form-data">
+                    <div class="row g-4 align-items-start">
+                        <!-- Kolom Kiri: Isi Berita -->
+                        <div class="col-lg-8">
+                            <div class="panel-card">
+                                <h5 class="fw-bold text-navy mb-4">Isi Berita</h5>
+
+                                <div class="mb-4">
+                                    <label for="judul" class="form-label-custom">Judul *</label>
+                                    <textarea class="form-control form-control-custom" id="judul" name="judul" rows="2" placeholder="Membangun Generasi Berkarakter dan Berprestasi" required></textarea>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="id_kategori" class="form-label-custom">Kategori *</label>
+                                    <select class="form-select form-select-custom" id="id_kategori" name="id_kategori" required>
+                                        <option value="1" selected>Kegiatan sekolah</option>
+                                        <option value="2">Berita sekolah</option>
+                                        <option value="3">Pengumuman resmi</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="isi_berita" class="form-label-custom">Isi artikel *</label>
+                                    <div class="editor-wrapper">
+                                        <div class="editor-toolbar">
+                                            <button type="button" class="editor-tool-btn" onclick="sisipFormat('**teks tebal**')">Tebal</button>
+                                            <button type="button" class="editor-tool-btn" onclick="sisipFormat('*teks miring*')">Miring</button>
+                                            <button type="button" class="editor-tool-btn" onclick="sisipFormat('\n- Poin daftar')">Daftar</button>
+                                            <button type="button" class="editor-tool-btn" onclick="sisipFormat('[Teks tautan](https://)')">Tautan</button>
+                                        </div>
+                                        <textarea class="editor-area" id="isi_berita" name="isi_berita" placeholder="Ikuti kabar terbaru tentang kegiatan, program, dan prestasi peserta didik.&#10;&#10;Tambahkan naskah lengkap yang sudah diverifikasi sekolah..." required></textarea>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="form-label-custom d-block">Foto / lampiran pengumuman</label>
+                                    <label for="gambar_utama" class="btn-pill-navy px-4 py-2 d-inline-block" style="cursor: pointer;">
+                                        Pilih gambar
+                                    </label>
+                                    <input type="file" id="gambar_utama" name="gambar_utama" accept="image/*" class="d-none">
+                                    <span id="namaFileLampiran" class="small text-muted ms-2"></span>
+                                    <div class="text-muted mt-2" style="font-size: 0.78rem;">Unggah foto atau lampiran gambar yang telah diizinkan sekolah.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Kolom Kanan: Publikasi & Penting -->
+                        <div class="col-lg-4 d-flex flex-column gap-4">
+                            <div class="panel-card">
+                                <h5 class="fw-bold text-navy mb-4">Publikasi</h5>
+
+                                <div class="mb-4">
+                                    <label class="form-label-custom">Status</label>
+                                    <input type="text" id="statusTeks" class="form-control form-control-custom fw-semibold text-muted" value="Draf" readonly>
+                                    <input type="hidden" id="statusNilai" name="status" value="draft">
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="form-label-custom d-block">Persetujuan kepala sekolah</label>
+                                    <div class="form-check mt-2">
+                                        <input class="form-check-input" type="checkbox" id="persetujuanKepsek" style="background-color: #eef3fa; border-color: #cbd5e1; width: 18px; height: 18px;">
+                                        <label class="form-check-label text-navy small ms-1" for="persetujuanKepsek" style="cursor: pointer;">
+                                            Sudah disetujui untuk terbit
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-column gap-3 pt-2">
+                                    <button type="submit" name="aksi" value="draft" class="btn-pill-navy w-100">Simpan draf</button>
+                                    <button type="submit" name="aksi" value="terbit" id="btnTerbitkan" class="btn-pill-soft w-100" disabled>Terbitkan berita</button>
+                                </div>
+                            </div>
+
+                            <div class="important-card">
+                                <h5 class="fw-bold text-navy mb-3">Penting</h5>
+                                <p class="text-navy small mb-0" style="line-height: 1.65;">
+                                    Terbitkan hanya setelah persetujuan kepala sekolah. Konten draf tidak muncul pada situs pengunjung.
+                                </p>
+                            </div>
+
+                            <div>
+                                <a href="berita.html" class="text-navy fw-bold text-decoration-none small">
+                                    &larr; Kembali ke daftar berita
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </main>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Aktifkan tombol Terbitkan berita saat persetujuan kepala sekolah dicentang
+        const checkSetuju = document.getElementById('persetujuanKepsek');
+        const btnTerbitkan = document.getElementById('btnTerbitkan');
+        const statusTeks = document.getElementById('statusTeks');
+        const statusNilai = document.getElementById('statusNilai');
+
+        checkSetuju.addEventListener('change', function () {
+            if (this.checked) {
+                btnTerbitkan.disabled = false;
+                btnTerbitkan.classList.add('ready');
+                statusTeks.value = 'Siap terbit';
+                statusNilai.value = 'terbit';
+            } else {
+                btnTerbitkan.disabled = true;
+                btnTerbitkan.classList.remove('ready');
+                statusTeks.value = 'Draf';
+                statusNilai.value = 'draft';
+            }
+        });
+
+        // Tampilkan nama file gambar yang dipilih
+        document.getElementById('gambar_utama').addEventListener('change', function () {
+            const label = document.getElementById('namaFileLampiran');
+            label.textContent = this.files.length > 0 ? this.files[0].name : '';
+        });
+
+        // Toolbar bantu format teks
+        function sisipFormat(teks) {
+            const area = document.getElementById('isi_berita');
+            area.value += (area.value ? ' ' : '') + teks;
+            area.focus();
+        }
+    </script>
+</body>
+</html>

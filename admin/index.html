@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - SD Negeri 18 Pandan</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7fb;
+            margin: 0;
+        }
+        .text-navy { color: #0b3d82; }
+        .bg-navy { background-color: #0b3d82; }
+
+        /* Layout Utama */
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Kiri */
+        .sidebar {
+            width: 270px;
+            background-color: #0b3d82;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 28px 20px;
+            flex-shrink: 0;
+        }
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 32px;
+            padding: 0 8px;
+        }
+        .sidebar-logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #ffffff;
+            padding: 2px;
+        }
+        .sidebar-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            opacity: 0.7;
+            padding: 0 12px;
+            margin-bottom: 12px;
+        }
+        .sidebar-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        .sidebar-link:hover {
+            background-color: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+        }
+        .sidebar-link.active {
+            background-color: #ffffff;
+            color: #0b3d82;
+            font-weight: 700;
+        }
+        .sidebar-num {
+            font-size: 0.75rem;
+            opacity: 0.75;
+            min-width: 18px;
+        }
+        .sidebar-footer {
+            padding: 20px 12px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .logout-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-top: 16px;
+        }
+        .logout-link:hover {
+            text-decoration: underline;
+            color: #fca5a5;
+        }
+
+        /* Konten Kanan */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .topbar {
+            background-color: #ffffff;
+            padding: 18px 40px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .content-body {
+            padding: 36px 40px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* Kartu Statistik & Info */
+        .stat-card {
+            background-color: #ffffff;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid #e2e8f0;
+            height: 100%;
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #0b3d82;
+            line-height: 1.2;
+            margin: 10px 0 8px;
+        }
+        .guide-card {
+            background-color: #e4edf9;
+            border-radius: 16px;
+            padding: 28px;
+            height: 100%;
+        }
+        .btn-pill-navy {
+            background-color: #0b3d82;
+            color: #ffffff;
+            border-radius: 50px;
+            padding: 12px 24px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            transition: background-color 0.2s ease;
+        }
+        .btn-pill-navy:hover {
+            background-color: #082c5e;
+            color: #ffffff;
+        }
+
+        @media (max-width: 991.98px) {
+            .admin-layout {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+            }
+            .topbar, .content-body {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="admin-layout">
+        <!-- Sidebar Kiri -->
+        <aside class="sidebar">
+            <div>
+                <div class="sidebar-brand">
+                    <img src="../assets/img/logo-sekolah.jpeg" alt="Logo SDN 18 Pandan" class="sidebar-logo" onerror="this.style.display='none'">
+                    <div class="fw-bold lh-sm" style="font-size: 0.9rem;">SD NEGERI<br>18 PANDAN</div>
+                </div>
+
+                <div class="sidebar-label">PANEL ADMIN</div>
+
+                <ul class="sidebar-nav">
+                    <li>
+                        <a href="index.html" class="sidebar-link active">
+                            <span class="sidebar-num">01</span>
+                            <span>Ringkasan</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="guru.html" class="sidebar-link">
+                            <span class="sidebar-num">02</span>
+                            <span>Data guru</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="berita.html" class="sidebar-link">
+                            <span class="sidebar-num">03</span>
+                            <span>Berita &amp; pengumuman</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="galeri.html" class="sidebar-link">
+                            <span class="sidebar-num">04</span>
+                            <span>Galeri kegiatan</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="prestasi.html" class="sidebar-link">
+                            <span class="sidebar-num">05</span>
+                            <span>Prestasi</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="profil.html" class="sidebar-link">
+                            <span class="sidebar-num">06</span>
+                            <span>Profil sekolah</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="fw-bold small">Martha Susanti, S.Pd.</div>
+                <div class="small opacity-75" style="font-size: 0.78rem;">Operator sekolah</div>
+                <a href="login.html" class="logout-link">Keluar akun &rarr;</a>
+            </div>
+        </aside>
+
+        <!-- Konten Utama Kanan -->
+        <div class="main-content">
+            <!-- Topbar -->
+            <header class="topbar">
+                <div class="small text-muted">
+                    Admin &nbsp;/&nbsp; <span class="text-navy fw-semibold">Ringkasan</span>
+                </div>
+                <a href="../index.html" class="text-navy fw-bold text-decoration-none small">
+                    Lihat situs sekolah &rarr;
+                </a>
+            </header>
+
+            <!-- Isi Dashboard -->
+            <main class="content-body">
+                <h2 class="fw-bold text-navy mb-1">Selamat datang, Ibu Martha</h2>
+                <p class="text-muted small mb-4">Kelola informasi sekolah dari satu tempat.</p>
+
+                <!-- Baris 1: 4 Kartu Statistik -->
+                <div class="row g-3 mb-4">
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="stat-card">
+                            <div class="text-navy fw-bold small">Guru &amp; tendik</div>
+                            <div class="stat-number">8</div>
+                            <div class="text-muted" style="font-size: 0.78rem;">1 kepala sekolah &middot; 7 guru</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="stat-card">
+                            <div class="text-navy fw-bold small">Berita terbit</div>
+                            <div class="stat-number">&mdash;</div>
+                            <div class="text-muted" style="font-size: 0.78rem;">Data belum tersedia</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="stat-card">
+                            <div class="text-navy fw-bold small">Album kegiatan</div>
+                            <div class="stat-number">&mdash;</div>
+                            <div class="text-muted" style="font-size: 0.78rem;">Data belum tersedia</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="stat-card">
+                            <div class="text-navy fw-bold small">Prestasi</div>
+                            <div class="stat-number">&mdash;</div>
+                            <div class="text-muted" style="font-size: 0.78rem;">Data belum tersedia</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Baris 2: Statistik Pengunjung & Sebelum Menerbitkan -->
+                <div class="row g-4 mb-4">
+                    <div class="col-lg-8">
+                        <div class="stat-card p-4">
+                            <h5 class="fw-bold text-navy mb-1">Statistik Pengunjung</h5>
+                            <p class="text-muted small mb-4">Ringkasan kunjungan situs sekolah</p>
+
+                            <h6 class="fw-bold text-navy mb-2">Belum ada statistik kunjungan</h6>
+                            <p class="text-muted small mb-0" style="max-width: 540px; line-height: 1.65;">
+                                Angka kunjungan akan ditampilkan setelah pencatatan tersedia. Tidak ada angka contoh yang dianggap sebagai data asli.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="guide-card">
+                            <h5 class="fw-bold text-navy mb-4">Sebelum Menerbitkan</h5>
+
+                            <div class="d-flex gap-3 mb-3 small">
+                                <span class="fw-bold text-muted">01</span>
+                                <span class="fw-bold text-navy">Periksa isi &amp; sumber informasi</span>
+                            </div>
+                            <div class="d-flex gap-3 mb-3 small">
+                                <span class="fw-bold text-muted">02</span>
+                                <span class="fw-bold text-navy">Minta persetujuan kepala sekolah</span>
+                            </div>
+                            <div class="d-flex gap-3 small">
+                                <span class="fw-bold text-muted">03</span>
+                                <span class="fw-bold text-navy">Terbitkan berita yang disetujui</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Baris 3: Mulai Mengelola -->
+                <div class="stat-card p-4">
+                    <h5 class="fw-bold text-navy mb-1">Mulai Mengelola</h5>
+                    <p class="text-muted small mb-4">Lengkapi informasi prioritas sebelum ditampilkan kepada pengunjung.</p>
+
+                    <div class="row g-3">
+                        <div class="col-sm-6 col-md-3">
+                            <a href="guru.html" class="btn-pill-navy w-100">Tambah data guru</a>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <a href="berita.html" class="btn-pill-navy w-100">Tulis berita</a>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <a href="galeri.html" class="btn-pill-navy w-100">Buat album</a>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <a href="profil.html" class="btn-pill-navy w-100">Ubah profil</a>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
